@@ -1,0 +1,16 @@
+server {
+    listen {{ port }};
+    server_name 0.0.0.0 {{ domains|join(' ') }};
+
+    {% if ssl %}
+        ssl on;
+        ssl_certificate {{ cert_path }};
+        ssl_certificate_key {{ cert_key_path }};
+    {% endif %}
+
+    location / {
+        uwsgi_pass  {{ uwsg_host }}:{{ uwsgi_port }};
+        include uwsgi_params;
+        client_max_body_size 200m;
+    }
+}

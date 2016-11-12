@@ -1,0 +1,27 @@
+---
+- name: update apt cache
+  apt: update_cache=yes cache_valid_time=3600*24
+  run_once: true
+  
+- name: install nginx
+  apt: name=nginx
+
+- block:
+  - name: mkdir cert folder
+    file: path='{{ cert_base_path }}' state=directory
+
+  - name: copy cert
+    copy: src='{{ cert }}' dest='{{ cert_path }}'
+
+  - name: copy cert key
+    copy: src='{{ cert_key }}' dest='{{ cert_key_path }}' mode=0600
+
+  - name: setup http->https redirect
+    template: src=redirect dst='/etc/nginx/sites-enabled/{{ domain }}_redirect'
+    when: redirect_http
+    notify: reload nginx
+  when: ssl
+
+- name: setup webserver
+  template: src=uwsgi_container dst='/etc/nginx/sites-enabled/{{ domain }}'
+  notify: reload nginx
