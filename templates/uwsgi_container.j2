@@ -1,5 +1,5 @@
 server {
-    listen {{ port }};
+    listen {{ http_port }};
     server_name 0.0.0.0 {{ domains|join(' ') }};
 
     {% if ssl %}
@@ -9,7 +9,7 @@ server {
     {% endif %}
 
     location / {
-        uwsgi_pass  {{ uwsg_host }}:{{ uwsgi_port }};
+        uwsgi_pass  {{ uwsgi_host }}:{{ uwsgi_port }};
         include uwsgi_params;
         client_max_body_size 200m;
     }

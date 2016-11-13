@@ -1,9 +1,11 @@
 ---
-port: 80
+http_port: 80
 
 ssl: False
 redirect_http: False
 
+cert: cert.pem
+cert_key: cert.key
 cert_base_path: /etc/ssl/certs
 
 uwsgi_host: 127.0.0.1
