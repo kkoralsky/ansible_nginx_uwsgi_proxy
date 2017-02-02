@@ -14,6 +14,3 @@ galaxy_info:
 
 dependencies:
   - role: nginx_base
-    #_ssl: '{{ ssl }}'
-    #_cert: '{{ cert }}'
-    #_cert_key: '{{ cert_key }}'

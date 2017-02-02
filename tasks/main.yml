@@ -1,9 +1,4 @@
 ---
-- name: setup http->https redirect
-  template: src=redirect.j2 dest='/etc/nginx/sites-enabled/{{ domain }}_redirect'
-  when: redirect_http and ssl
-  notify: reload nginx
-
 - name: setup webserver
   template: src=uwsgi_container.j2 dest='/etc/nginx/sites-enabled/{{ fname }}'
   notify: reload nginx
