@@ -17,7 +17,7 @@ Role Variables
 Dependencies
 ------------
 
-- xkoralsky.nginx_base
+- `xkoralsky.nginx_base`
 
 Example Playbook
 ----------------
