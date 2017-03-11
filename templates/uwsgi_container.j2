@@ -1,6 +1,6 @@
 server {
     listen {{ http_port }};
-    server_name 0.0.0.0 {{ domains|join(' ') }};
+    server_name {{ domains|join(' ') }};
 
     {% if nginx_access_log %}
         access_log /var/log/nginx/{{ domain }}-access.log;
