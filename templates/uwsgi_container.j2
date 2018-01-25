@@ -25,5 +25,9 @@ server {
         uwsgi_pass  {{ uwsgi_host }}:{{ uwsgi_port }};
         include uwsgi_params;
         client_max_body_size 200m;
+        {% if nginx_chunked_encoding %}
+            proxy_buffering off;
+            chunked_transfer_encoding on;
+        {% endif %}
     }
 }
